@@ -16,9 +16,10 @@ By adding a custom button `https://na15.salesforce.com/apex/SurveyMobileKI?aid={
 4. next add two questions Groups related to that scorecard type called group1 and group2 with a group weight of 50 for each, make the sequence number 2 the second group
 5. Next add two questions to each of the groups you created in the previous step, each with weight 50 (the question weight for each group should equal 100), select any value for Area and State, keep the minimum value 1 and maximum value 4, set the sequence number appropriately . 
 6.  If you have done it correctly you should be able to hit 
-      /apex/SurveyMobileKI?stid=[id of record in step 2][&aid=[any account id in your org]
-![survey](https://s3.amazonaws.com/bowermanpublic/surveyscreenshot.png)      
+      /apex/SurveyMobileKI?stid=[id of record in step 2][&aid=[any account id in your org]    
 7.  Once you fill this form out you should now have a new scorecard related to you account
+
+![survey](https://s3.amazonaws.com/bowermanpublic/surveyscreenshot.png)  
 
 __note that the SurveyMobileKI has the state and area listed as part of the questions where the SurveyMobile does not__
 
