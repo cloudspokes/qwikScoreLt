@@ -2,9 +2,11 @@
 ##Overview
 QwikscoreLt is a combination Salesforce survey schema and corresponding jquerymobile page.   The image below shows 5 object that make up qwikscore and they are broken up into two domains.   The template domain has three objects that  allows users to create a Survey,  (QwikScore__c) , sections (QwikScore_Question_group__c), and the questions themselves (QwikScore_Questions__c).  
 
-     https://na15.salesforce.com/apex/SurveyMobileKI?aid={!Account.Id}&stid=a04i0000000yPsI
+     
+![image](https://s3.amazonaws.com/bowermanpublic/qwikscoreLt700.png)
 
-By adding a custom button on the account page you can pass in the account and QwickScore__c.id to instantiate the survey template for that account (QwikScore_Scorecard__c) and the set of questions (QwikScore_Questions_Answer__c) with blank answer values.    When the user fills out the survey from the SurveyMobile.page (via the button on account) they add values to the question_answer object.   When the form is submitted the instantiated survey  sums the final score and other statics of the question values.
+
+By adding a custom button `https://na15.salesforce.com/apex/SurveyMobileKI?aid={!Account.Id}&stid=a04i0000000yPsI` on the account page you can pass in the account and QwickScore__c.id to instantiate the survey template for that account (QwikScore_Scorecard__c) and the set of questions (QwikScore_Questions_Answer__c) with blank answer values.    When the user fills out the survey from the SurveyMobile.page (via the button on account) they add values to the question_answer object.   When the form is submitted the instantiated survey  sums the final score and other statics of the question values.
 
 ---
 

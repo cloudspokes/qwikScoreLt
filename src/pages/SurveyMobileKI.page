@@ -1,0 +1,222 @@
+<apex:page docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false" controller="SurveyMobileController">
+<head>
+    <title>Mobile Survey</title>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/jquery.mobile-1.1.0.min.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/style.css')}" />
+
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery-1.7.2.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.mobile-1.1.0.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.json-2.3.min.js')}"></script>
+
+    <script type="text/javascript">
+    var questions = [];
+    var accountId;
+    var scorecardTypeId;
+    
+    function handleAnswers(data, event) {
+        
+        if (event.status) {
+                //if event status is not avaiable or is there any error
+                if(data){
+            //if data is not available
+    
+            var question_groups = [];
+            var html = '';
+            var i, j;
+            var groupKey;
+    
+            //seed global questions with the data from remoting call
+            questions = data;
+            //console.log('size:' + questions.length);
+            if(questions.length>0){
+                $('#title').text(questions[0].Question__r.QwikScore_Question_Group__r.QwikScore_Survey__r.Name +' Survey');
+                $(document).attr('title',questions[0].Question__r.QwikScore_Question_Group__r.QwikScore_Survey__r.Name +' Survey');
+                html += '<div><h3>'+(questions[0].QwikScore_Scorecard__r.Survey_For__r.Name)+'</h3></div>';
+                html += '<div>';
+                if(questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingCity){
+                    html += (questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingStreet)+' ';
+                }
+                if(questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingCity){
+                    html += (questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingCity)+' ';
+                }
+                if(questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingState){
+                    html += (questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingState)+' ';
+                }
+                if(questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingCountry){
+                html += (questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingCountry)+' ';
+                }
+                if(questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingPostalCode){
+                    html += (questions[0].QwikScore_Scorecard__r.Survey_For__r.BillingPostalCode);
+                }
+                html += '</div>';
+            }
+            // get questions groups
+            for (i = 0; i < questions.length; i += 1) {
+                var seqNum = questions[i].Question__r.QwikScore_Question_Group__r.Sequence_Number__c;
+                if (seqNum !== undefined && seqNum !== null && question_groups['n' + seqNum] === undefined ) {
+                    question_groups['n' + seqNum] = questions[i].Question__r.QwikScore_Question_Group__r;
+                    //console.log('loaded group ' + 'n' + seqNum);
+                }
+            }
+    
+            for (groupKey in question_groups) {
+                if (question_groups.hasOwnProperty(groupKey)) {
+                    // check if question group exist
+                    // add header with question group name and weight
+                    html += '<li><h2>' + question_groups[groupKey].Name + ' (' + question_groups[groupKey].Group_Weight__c + '%)</h2>' + '<div class="questions">';
+    
+                    // add questions to group
+                    for (i = 0; i < questions.length; i += 1) {
+                        //Weed out the weird double-reporting from js remoting
+                        if (questions[i].Question__r.QwikScore_Question_Group__r.Sequence_Number__c !== undefined) {
+                            var question = {
+                                Qid: questions[i].Question__r.Sequence_Number__c,
+                                QGid: questions[i].Question__r.QwikScore_Question_Group__r.Sequence_Number__c,
+                                Label: questions[i].Question__r.Question_Text__c,
+                                Weight: questions[i].Question__r.Question_Weight__c,
+                                MaximumValue: questions[i].Question__r.Maximum_Value__c,
+                                MinimumValue: questions[i].Question__r.Minimum_Value__c,
+                                Type: questions[i].Question__r.Question_Type__c,
+                                State: questions[i].Question__r.State__c,
+                                Area: questions[i].Question__r.Area__c,
+                                Id: questions[i].Question__c
+                            };
+    
+                            // add question for current group
+                            if ('n' + question.QGid === groupKey) {
+                                // we process two type of questions: Numeric and Text
+                                // add more below if you want
+                                switch (question.Type) {
+                                    // build controlgroup with radioboxes for Numeric
+                                case 'Numeric':
+                                    html += '<div class="weight">' + question.Weight + '%</div>' 
+                                        + '<fieldset data-role="controlgroup" data-type="horizontal">' 
+                                        + '<legend>' + '<b>'+ question.State + ': </b>' 
+                                        + question.Area+ ' <br/>'
+                                        + question.Label + '<hr></legend>';
+    
+    
+                                    for (j = question.MinimumValue; j <= question.MaximumValue; j += 1) {
+                                        html += '<input type="radio" name="' + question.Id + '" id="qid' + question.Qid + '-choice' + j + '" value="' + j + '">' + '<label for="qid' + question.Qid + '-choice' + j + '">' + j + '</label>';
+                                    }
+    
+                                    html += '</fieldset>';
+                                    break;
+                                    // and textarea for Text
+                                case 'Text':
+                                    html += '<label for="qid' + question.Qid + '">' + question.Label + ':</label>' + '<textarea name="' + question.Id+ '" id="qid' + question.Qid + '"></textarea>' + '<div class="note">Limit 255 characters</div>';
+                                    break;
+                                default:
+                                    // do something with unknown question type
+                                }
+                            }
+                        } else {
+                            //console.log('why was this blank?');
+                        }
+                    }
+                    html += '</div></li>';
+                    //console.log('end of loop?');
+                }
+            }
+            // build html output from quetions
+    
+            // add html to document
+            //console.log('adding to doc...');
+            $('#mobile-survey').html(html);
+            $('#mobile-survey').trigger('create');
+            $.mobile.hidePageLoadingMsg();
+            }
+            else{
+            // hide message and render html output
+            $.mobile.hidePageLoadingMsg();
+            $('#main').html('');
+            $('#main').trigger('create');
+            $.mobile.showPageLoadingMsg('a', 'Sorry! survey is not available', true);
+            }
+            
+        } else {
+            // hide message and render html output
+            $.mobile.showPageLoadingMsg('a', event.message, true);
+        }
+    }
+    
+    $(function () {
+        
+        //show the loading message   
+        $.mobile.showPageLoadingMsg('a', 'Loading data', true);
+        
+        //grab the accountId from the querystring
+        accountId = '{!$CurrentPage.parameters.aid}';
+        
+        //grab the scorecardTypeID (TODO: implement logic around "sites" user only being allowed this default, etc)
+        scorecardTypeId = '{!$CurrentPage.parameters.stid}';
+        scorecardTypeId = (scorecardTypeId == null || scorecardTypeId == '') ? 'a0EE0000000GmPM' : scorecardTypeId;
+      
+        //Check for AID.  If present, fetch the survey
+        if (accountId  == null || accountId  === undefined) {
+            $.mobile.showPageLoadingMsg('a', 'No AID supplied, can not continue', true);
+        }
+        else {
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SurveyMobileController.questionAnswersJS}',accountId, scorecardTypeId , handleAnswers);        
+        }
+           
+        // On submit, merge the answers in to the questions list, and send data
+        $('#submit').click(function () {
+            // get values from document
+            var values = {};
+            var i;
+            $('#mobile-survey input[type="radio"]:checked,#mobile-survey textarea').each(function () {
+                //The name of each element cooresponds to the question ID
+                values[$(this).attr('Name')] = $(this).val();
+            });
+    
+            // filling questions objects
+            for (i = 0; i < questions.length; i += 1) {
+                //If this question contains an anwer in the array, get the answer
+                if (values[questions[i].Question__c]) {
+                    questions[i].Answer_Text__c = values[questions[i].Question__c];
+                }
+            }
+    
+            // send data
+            $.mobile.showPageLoadingMsg('a', 'Sending data', true);
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SurveyMobileController.saveScoreCard}', $.toJSON(questions), function(data,events){
+                if (events.status) {
+                    //$.mobile.hidePageLoadingMsg();
+                   $('#main').html('');
+                   $('#main').trigger('create');                  
+                   $.mobile.showPageLoadingMsg('a', 'Thank You for filling out our Survey', true);
+                   if(data.QwikScore_Survey__r.Name=='Customer Satisfaction Survey'){
+                        setTimeout(goToFB, 2000);
+                   }
+                    
+                }
+                else {
+                   $.mobile.showPageLoadingMsg('a', events.message, true); 
+                }
+            });
+    
+            return false;
+        });
+    });
+    function goToFB(){
+        window.location.href = "http://www.facebook.com/DunkinDonuts";
+    }
+    </script>
+</head>
+<body>
+
+<section data-role="page" id="main">
+    <h1 id="title">Mobile Survey</h1> 
+
+    <ul id="mobile-survey"></ul>
+
+    <a href="" data-role="button" data-theme="b" id="submit">Submit</a>
+    
+</section>
+
+</body>
+</apex:page>
