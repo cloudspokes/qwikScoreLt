@@ -27,6 +27,6 @@ __note that the SurveyMobileKI has the state and area listed as part of the ques
 
 
 
-*based on [asset:](https://appirio.my.salesforce.com/apex/CMC_AssetView?id=a3E50000000CaZyEAK&sfdc.override=1 "Asset")
-*dev5 is the latest dev org
+* based on [asset:](https://appirio.my.salesforce.com/apex/CMC_AssetView?id=a3E50000000CaZyEAK&sfdc.override=1 "Asset")
+* dev5 is the latest dev org
 
