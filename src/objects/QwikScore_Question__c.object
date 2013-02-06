@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A question to ask.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Area__c</fullName>
+        <externalId>false</externalId>
+        <label>Area</label>
+        <picklist>
+            <picklistValues>
+                <fullName>People</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Process</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Maximum_Value__c</fullName>
+        <defaultValue>4</defaultValue>
+        <description>What is the maximum value for this question (numeric questions only)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the maximum value for this question (numeric questions only)</inlineHelpText>
+        <label>Maximum Value</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_Value__c</fullName>
+        <defaultValue>1</defaultValue>
+        <description>What is the lowest value (if this is a numeric type question)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the lowest value (if this is a numeric type question)</inlineHelpText>
+        <label>Minimum Value</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Question_Text__c</fullName>
+        <description>The question to be presented to the user.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The question to be presented to the user.</inlineHelpText>
+        <label>Question</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Question_Type__c</fullName>
+        <description>What type of question is this? Only numeric questions will count toward the final scoring result.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What type of question is this? Only numeric questions will count toward the final scoring result.</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Numeric</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Question_Weight__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>How much of this questions group total score is this question worth (0 - 100)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How much of this questions group total score is this question worth (0 - 100)</inlineHelpText>
+        <label>Weight</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>QwikScore_Question_Group__c</fullName>
+        <description>Which question group does this question belong to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which question group does this question belong to?</inlineHelpText>
+        <label>Group</label>
+        <referenceTo>QwikScore_Question_Group__c</referenceTo>
+        <relationshipLabel>Questions</relationshipLabel>
+        <relationshipName>QwikScore_Questions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SQL_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>SQL Id</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Sequence_Number__c</fullName>
+        <defaultValue>1</defaultValue>
+        <description>In what order should this question be presented within it&apos;s group? Lower numbers come first.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>In what order should this question be presented within it&apos;s group? Lower numbers come first.</inlineHelpText>
+        <label>Sequence Number</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <label>State</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Future</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Group_Sequence__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Set by a &quot;before&quot; trigger. Field to ensure that the question sequence number is unique for its group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Set by a &quot;before&quot; trigger. Field to ensure that the question sequence number is unique for its group.</inlineHelpText>
+        <label>Unique Group Sequence</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Question</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Question_Text__c</columns>
+        <columns>Minimum_Value__c</columns>
+        <columns>Maximum_Value__c</columns>
+        <columns>Question_Weight__c</columns>
+        <columns>Sequence_Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>QQ-{0000}</displayFormat>
+        <label>ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Questions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Maximum_greater_than_minimum</fullName>
+        <active>true</active>
+        <description>The maximum value must be greater than the minimum value for Numeric questions.</description>
+        <errorConditionFormula>AND( ISPICKVAL( Question_Type__c , &quot;Numeric&quot;)  , 
+ IF( NOT( Maximum_Value__c &gt;  Minimum_Value__c ) , true, false) )</errorConditionFormula>
+        <errorDisplayField>Maximum_Value__c</errorDisplayField>
+        <errorMessage>The maximum value must be greater than the minimum value.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Minimum_value_greater_than_0</fullName>
+        <active>true</active>
+        <description>The minimum value must be greater than 0 if numeric question.</description>
+        <errorConditionFormula>AND( ISPICKVAL( Question_Type__c , &quot;Numeric&quot;)  , Minimum_Value__c == 0 )</errorConditionFormula>
+        <errorDisplayField>Minimum_Value__c</errorDisplayField>
+        <errorMessage>The minimum value must be greater than 0 for Numeric questions.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>No_Single_Quotes</fullName>
+        <active>true</active>
+        <description>Not single quotes allowed in questions.</description>
+        <errorConditionFormula>CONTAINS( Question_Text__c ,&quot;&apos;&quot;)</errorConditionFormula>
+        <errorDisplayField>Question_Text__c</errorDisplayField>
+        <errorMessage>Single quotes are not allowed in the question text as it screws up the JSON and Javascript.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Non_numeric_must_be_0</fullName>
+        <active>true</active>
+        <description>Non-numeric questions must have a weight of 0.</description>
+        <errorConditionFormula>AND( NOT( ISPICKVAL( Question_Type__c , &quot;Numeric&quot;) ) ,  Question_Weight__c &gt; 0 )</errorConditionFormula>
+        <errorDisplayField>Question_Weight__c</errorDisplayField>
+        <errorMessage>Weight must be 0 for questions that are not Numeric.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Sequence_greater_than_1</fullName>
+        <active>true</active>
+        <description>Ensure that a sequence number is greater than 1.</description>
+        <errorConditionFormula>Sequence_Number__c &lt; 1</errorConditionFormula>
+        <errorDisplayField>Sequence_Number__c</errorDisplayField>
+        <errorMessage>The sequence number must be greater than 1.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>question_weight_between_0_and_100</fullName>
+        <active>true</active>
+        <description>Ensure that a weight of a question falls between 1 and 100 (inclusive) if it&apos;s Numeric.</description>
+        <errorConditionFormula>AND(  ISPICKVAL( Question_Type__c , &quot;Numeric&quot;)  , OR( Question_Weight__c  &lt; 0.01,  Question_Weight__c  &gt; 1.0))</errorConditionFormula>
+        <errorDisplayField>Question_Weight__c</errorDisplayField>
+        <errorMessage>The weight for a question must be between 1% and 100%.</errorMessage>
+    </validationRules>
+</CustomObject>
