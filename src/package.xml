@@ -10,6 +10,7 @@
     <types>
         <members>Survey</members>
         <members>SurveyMobile</members>
+        <members>SurveyMobileKI</members>
         <members>SurveyResults</members>
         <name>ApexPage</name>
     </types>
