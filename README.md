@@ -21,7 +21,7 @@ By adding a custom button `https://na15.salesforce.com/apex/SurveyMobileKI?aid={
 
 ![survey](https://s3.amazonaws.com/bowermanpublic/surveyscreenshot.png)  
 
-7.  Once you fill this form out you should now have a new scorecard related to you account
+* Once you fill this form out you should now have a new scorecard related to you account
 
 __note that the SurveyMobileKI has the state and area listed as part of the questions where the SurveyMobile does not__
 
