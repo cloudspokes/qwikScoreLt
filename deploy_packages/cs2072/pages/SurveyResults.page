@@ -1,0 +1,52 @@
+<apex:page controller="SurveyResultsController" id="pg" sideBar="false" showHeader="false" standardstylesheets="false"> 
+        <style>
+        .bPageBlock .detailList .labelCol {
+        width: 50%;
+        }   
+        </style>
+        <apex:pageMessages />
+    <apex:form id="frm" >
+        <apex:pageBlock id="pb" title="{!scoreCard.QwikScore_Survey__r.Name}" >
+        <table width="100%">
+            <tr>
+                <td>Survey Title : </td><td>{!scoreCard.QwikScore_Survey__r.Name}</td>
+                <td>Account : </td><td>{!scoreCard.Survey_For__r.Name}</td>                             
+            </tr>
+            <tr>
+                <td>Created By : </td><td>{!scoreCard.CreatedBy.Name}</td>
+                <td>Create Date : </td>
+                <td><apex:outputText value="{0,date,E MMM d yyyy}">
+                                <apex:param value="{!scoreCard.CreatedDate}" />
+                                </apex:outputText>
+                        </td>                               
+            </tr>
+        </table>
+            
+            <apex:variable var="questionNumber" value="{!1}"/>
+            		<table width="70%"> 
+            <apex:repeat value="{!questionGroups}" var="questionGroup">
+            		<tr> <td colspan="2"><h2>{!questionGroup.Name}</h2></td></tr>
+                    <apex:repeat value="{!questionAnswerMap[questionGroup.Id]}" var="questionAnswer">
+                <tr>
+                 <td>           <apex:outputText value="{!questionAnswer.Question__r.Question_Text__c}"/></td>
+	               <td align="right">             <apex:outputText value="{!questionAnswer.Answer_Text__c}"/> </td>
+                                <apex:variable var="questionNumber" value="{!questionNumber + 1}"/>
+                 </tr>
+                    </apex:repeat>
+            </apex:repeat>
+            </table>
+                    <table width="70%">
+                    <tr> <td colspan="2"><h2>Summary</h2></td></tr>
+            <tr>
+                <td>Total Raw Score : </td><td align="right">{!scoreCard.Total_Raw_Score__c}</td>
+                </tr>
+                <tr>
+                <td>Total Final Score : </td><td align="right" >{!scoreCard.Final_Score__c}</td>                             
+            </tr>
+						  
+						</table>          	
+        </apex:pageBlock>
+
+    </apex:form>
+
+</apex:page>

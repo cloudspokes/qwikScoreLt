@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Groups of questions</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Description of Section</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description of Section</inlineHelpText>
+        <label>Description</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Group_Weight__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>How much of the overall score is this group worth</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How much of the overall score is this group worth</inlineHelpText>
+        <label>Group Weight</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>IsValid__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Total_Question_Weight__c = 1, &quot;True&quot;, &quot;False&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Valid?</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Questions_in_Group__c</fullName>
+        <description>How many questions are in this group?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many questions are in this group?</inlineHelpText>
+        <label>Questions in Group</label>
+        <summaryForeignKey>QwikScore_Question__c.QwikScore_Question_Group__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>QwikScore_Survey__c</fullName>
+        <description>Which scorecard does this question group belong to?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which scorecard does this question group belong to?</inlineHelpText>
+        <label>Scorecard</label>
+        <referenceTo>QwikScore__c</referenceTo>
+        <relationshipLabel>Question Groups</relationshipLabel>
+        <relationshipName>QwikScore_Question_Groups</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SQL_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>SQL Id</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Sequence_Number__c</fullName>
+        <defaultValue>1</defaultValue>
+        <description>Controls the ordering of question groups when presented to a user.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>In what order should this group be displayed? Lower numbers come first.</inlineHelpText>
+        <label>Sequence Number</label>
+        <precision>2</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Question_Weight__c</fullName>
+        <description>Total weight from all questions in this group.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total weight from all questions in this group.</inlineHelpText>
+        <label>Total Question Weight</label>
+        <summarizedField>QwikScore_Question__c.Question_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question__c.QwikScore_Question_Group__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <label>Question Group</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>QwikScore_Survey__c</columns>
+        <columns>Sequence_Number__c</columns>
+        <columns>SQL_Id__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Question Group Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Question Groups</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>QwikScore_Survey__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Group_Weight__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Questions_in_Group__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Sequence_Number__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>QwikScore_Survey__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Questions_in_Group__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Sequence_Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Group_Weight__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Cannot_exceed_100_total_question_weight</fullName>
+        <active>true</active>
+        <errorConditionFormula>Total_Question_Weight__c &gt; 1</errorConditionFormula>
+        <errorMessage>You cannot exceed 100% for the total question weight of a group. Please reduce the weight of associated questions to total 100%.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Group_weight_between_0_and_100</fullName>
+        <active>true</active>
+        <description>Ensure that a weight of a group falls between 1% and 100% (inclusive).</description>
+        <errorConditionFormula>OR( Group_Weight__c  &lt; 0.01,  Group_Weight__c  &gt; 1.0)</errorConditionFormula>
+        <errorDisplayField>Group_Weight__c</errorDisplayField>
+        <errorMessage>The weight for a group must be between 1% and 100%.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Sequence_greater_than_1</fullName>
+        <active>true</active>
+        <description>Ensure that a sequence number is greater than 1.</description>
+        <errorConditionFormula>Sequence_Number__c &lt; 1</errorConditionFormula>
+        <errorDisplayField>Sequence_Number__c</errorDisplayField>
+        <errorMessage>The sequence number must be greater than 0.</errorMessage>
+    </validationRules>
+</CustomObject>

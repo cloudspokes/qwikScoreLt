@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to hold main types of scorecards.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Is this scorecard available to be taken?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this scorecard available to be taken?</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Average_Score__c</fullName>
+        <description>What is the average score for this scorecard?</description>
+        <externalId>false</externalId>
+        <formula>TotalScore__c  / Completed_Surveys__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>What is the average score for this scorecard?</inlineHelpText>
+        <label>Average Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Completed_Surveys__c</fullName>
+        <externalId>false</externalId>
+        <label>Completed Scorecards</label>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Display_Access__c</fullName>
+        <description>This field controls who the survey is displayed for.   It assumes that each entry point to surveys can use this field in the where clause to display a list of eligible surveys</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Who has access to complete the survey</inlineHelpText>
+        <label>Display_Access</label>
+        <picklist>
+            <picklistValues>
+                <fullName>corporate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>owner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>patron</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Groups_in_Survey__c</fullName>
+        <description>How many question groups are there in this scorecard type.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many question groups are there in this scorecard type.</inlineHelpText>
+        <label>Groups in Scorecard</label>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>IsValid__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  AND( Groups_in_Survey__c  =  Valid_Groups__c ,Total_Group_Weight__c = 1), &quot;True&quot;, &quot;False!&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Valid?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Max_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Score</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Min_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Score</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Questions_in_Survey__c</fullName>
+        <description>How many questions are in this scorecard type?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many questions are in this scorecard type?</inlineHelpText>
+        <label>Questions in Scorecard</label>
+        <summarizedField>QwikScore_Question_Group__c.Questions_in_Group__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SQL_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>SQL Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Survey_Description__c</fullName>
+        <description>What is the scorecard about?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What is the scorecard about?</inlineHelpText>
+        <label>Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>15</visibleLines>
+    </fields>
+    <fields>
+        <fullName>TotalScore__c</fullName>
+        <externalId>false</externalId>
+        <label>TotalScore</label>
+        <summarizedField>QwikScore_Scorecard__c.Final_Score__c</summarizedField>
+        <summaryFilterItems>
+            <field>QwikScore_Scorecard__c.Scored__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Scorecard__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Completion_Percent__c</fullName>
+        <description>The total percent of all group weights (used for calculating scorecard progress completion)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The total percent of all group weights (used for calculating scorecard progress completion)</inlineHelpText>
+        <label>Total Completion Percent</label>
+        <summarizedField>QwikScore_Question_Group__c.Total_Question_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Group_Weight__c</fullName>
+        <description>How much do all the created groups weights add up to? Should be 100% for a completed scorecard</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How much do all the created groups weights add up to? Should be 100% for a completed scorecard</inlineHelpText>
+        <label>Total Group Weight</label>
+        <summarizedField>QwikScore_Question_Group__c.Group_Weight__c</summarizedField>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Valid_Groups__c</fullName>
+        <description>The rollup number of groups marked as valid.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The rollup number of groups marked as valid.</inlineHelpText>
+        <label>Valid Groups</label>
+        <summaryFilterItems>
+            <field>QwikScore_Question_Group__c.IsValid__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QwikScore_Question_Group__c.QwikScore_Survey__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <type>Summary</type>
+    </fields>
+    <label>Scorecard Type</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>IsValid__c</columns>
+        <columns>Active__c</columns>
+        <columns>Groups_in_Survey__c</columns>
+        <columns>Questions_in_Survey__c</columns>
+        <columns>SQL_Id__c</columns>
+        <columns>Survey_Description__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Scorecard Types</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Active__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Questions_in_Survey__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Groups_in_Survey__c</customTabListAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Cannot_exceed_100_total_group_weight</fullName>
+        <active>true</active>
+        <errorConditionFormula>Total_Group_Weight__c   &gt; 100</errorConditionFormula>
+        <errorMessage>You cannot exceed 100% for the total group weight of a scorecard. Please reduce the weight of associated groups to total 100%.</errorMessage>
+    </validationRules>
+</CustomObject>
