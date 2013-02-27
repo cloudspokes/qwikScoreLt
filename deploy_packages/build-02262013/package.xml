@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>QwikScore_Question_Answer__c</members>
+        <members>QwikScore_Question_Group__c</members>
+        <members>QwikScore_Question__c</members>
+        <members>QwikScore_Scorecard__c</members>
+        <members>QwikScore__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+    	<members>AttachmentUploadController</members>
+		<members>ScoringEngineLite</members>
+		<members>SurveyTest</members>
+		<members>SurveyMobileController</members>
+        <members>SurveyResultsController</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>AttachmentUpload</members>
+		<members>SurveyMobile</members>
+		<members>SurveyResults</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+    	<members>survey_mobile_resources</members>
+    	<name>StaticResource</name>
+    </types>
+        <types>
+        <members>QwikScore_Question_Answer__c-Question Answer Layout</members>
+        <members>QwikScore_Question_Group__c-Question Group Layout</members>
+        <members>QwikScore_Question__c-Question Layout</members>
+        <members>QwikScore_Scorecard__c-Scorecard Layout</members>
+        <members>QwikScore__c-Scorecard Type Layout</members>
+        <name>Layout</name>
+    </types>
+     <types>
+        <members>QwikScore_Question_Answer__c</members>
+        <members>QwikScore_Question_Group__c</members>
+        <members>QwikScore_Question__c</members>
+        <members>QwikScore_Scorecard__c</members>
+        <members>QwikScore__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>QwikScoreAdmin</members>
+        <name>CustomApplication</name>
+    </types>
+
+
+
+
+
+    <version>27.0</version>
+</Package>

@@ -1,0 +1,61 @@
+<apex:page docType="html-5.0" sidebar="false" showHeader="false"
+    standardStylesheets="false"
+    controller="SurveyMobileController">
+    <head>
+    <title>Mobile Survey</title>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+   
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/jquery.mobile-1.1.0.min.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/style.css')}" />
+
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery-1.7.2.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.mobile-1.1.0.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.json-2.3.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/survey.js')}"></script>
+    <script type="text/javascript">
+    
+        
+    // remote call to get question answer        
+    function callRemoteQuestionAnswerJS(accountId, scorecardTypeId , callback){
+         Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SurveyMobileController.questionAnswersJS}',accountId, scorecardTypeId , callback); 
+    }
+    
+    // remote call to save scorecard
+    function callRemoteSaveScoreCard(jsonString, callback){
+        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.SurveyMobileController.saveScoreCard}', $.toJSON(jsonString),callback);
+        
+    }
+    $(function () {
+        questions = [];
+        accountId=null;
+        scorecardTypeId=null;
+        attachmentUrl='{!AttachementUrl}';
+        
+         //grab the accountId from the querystring
+        accountId = '{!$CurrentPage.parameters.aid}';
+        
+        //grab the scorecardTypeID (TODO: implement logic around "sites" user only being allowed this default, etc)
+        scorecardTypeId = '{!$CurrentPage.parameters.stid}';
+        scorecardTypeId = (scorecardTypeId == null || scorecardTypeId == '') ? 'a0EE0000000GmPM' : scorecardTypeId;
+        
+        load();    
+    });
+   
+    </script>
+    </head>
+   <body>
+
+<section data-role="page" id="main">
+    <h1 id="title">Mobile Survey</h1> 
+
+    <ul id="mobile-survey"></ul>
+
+    <a href="" data-role="button" data-theme="b" id="submit">Submit</a>
+    
+    
+</section>
+
+</body>
+</apex:page>
