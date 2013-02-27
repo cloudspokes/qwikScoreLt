@@ -28,6 +28,24 @@ __note that the SurveyMobileKI has the state and area listed as part of the ques
 
 ##Branch 2072 ##
 [Mobile Survey Enhancement 1](http://www.cloudspokes.com/challenges/2072)
+  sample links demo5
+  https://na15.salesforce.com/apex/SurveyMobileKI?aid=001i0000002LQ6i&stid=a04i0000000yPsI  <-ki / mm : broken
+  https://c.na15.visual.force.com/apex/SurveyMobileTalesforce?stid=a04i0000000yPsI&aid=001i0000002LQ6i  <- tf / mm : works
+   https://c.na15.visual.force.com/apex/SurveyMobileTalesforce?stid=a04i0000000ybqo&aid=001i0000002LQ6i <- tf / test
+
+   ## build-02262013
+   scorecard test: a0Bi0000000PlLt
+   Account UofA: 001i0000002t48p
+   Survey URL:
+   https://c.na15.visual.force.com/apex/SurveyMobile?stid=a0Bi0000000PlLt&aid=001i0000002t48p
+
+   scorecard MM: a0Bi0000000Plcw
+   Account UofA: 001i0000002t48p
+   Survey URL:
+   https://c.na15.visual.force.com/apex/SurveyMobile?stid=a0Bi0000000Plcw&aid=001i0000002t48p
+
+   
+
 
 
 
