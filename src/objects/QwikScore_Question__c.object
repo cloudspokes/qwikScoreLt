@@ -61,6 +61,13 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>IsHidden__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsHidden</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Maximum_Value__c</fullName>
         <defaultValue>4</defaultValue>
         <description>What is the maximum value for this question (numeric questions only)</description>
@@ -111,6 +118,10 @@
                 <fullName>Text</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>True/False</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <type>Picklist</type>
@@ -137,8 +148,16 @@
         <relationshipLabel>Questions</relationshipLabel>
         <relationshipName>QwikScore_Questions</relationshipName>
         <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Render__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Render</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>SQL_Id__c</fullName>
@@ -191,6 +210,26 @@
         <required>false</required>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>unhideIfQuestion__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>unhide If Question</label>
+        <referenceTo>QwikScore_Question__c</referenceTo>
+        <relationshipLabel>Questions</relationshipLabel>
+        <relationshipName>unhideIfQuestion</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>unhideQuestionValue__c</fullName>
+        <externalId>false</externalId>
+        <label>unhide QuestionValue</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <label>Question</label>
     <listViews>

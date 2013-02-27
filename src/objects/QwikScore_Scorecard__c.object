@@ -104,6 +104,7 @@
         <relationshipLabel>Scorecards</relationshipLabel>
         <relationshipName>QwikScore_Scorecard</relationshipName>
         <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>MasterDetail</type>
@@ -122,6 +123,7 @@
     </fields>
     <fields>
         <fullName>Survey_For__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Survey For</label>
         <referenceTo>Account</referenceTo>

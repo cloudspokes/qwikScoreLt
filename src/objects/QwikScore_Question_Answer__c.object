@@ -110,6 +110,7 @@
         <relationshipLabel>Question Answers</relationshipLabel>
         <relationshipName>QwikScore_Question_Answers</relationshipName>
         <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
@@ -123,6 +124,7 @@
         <relationshipLabel>Question Answers</relationshipLabel>
         <relationshipName>QwikScore_Question_Answers</relationshipName>
         <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
@@ -139,6 +141,14 @@
         <scale>2</scale>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>comments__c</fullName>
+        <description>comments</description>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <required>false</required>
+        <type>TextArea</type>
     </fields>
     <label>Question Answer</label>
     <listViews>

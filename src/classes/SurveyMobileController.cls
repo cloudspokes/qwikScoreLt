@@ -2,10 +2,33 @@
  * Controller for the mobile-optimized survey page (SurveyMobil.page)
  *
  * 07/10/2012  Cory McIlroy added header to this class.  also added call to ScoringEngineLite after save.  other minor changes
+ * 02/26/2013 Moved from SurveyMobileControllerTalesforce to SurveyMobileControllerT
  */
 public with sharing class SurveyMobileController {
+    
+     /* Getter method for attachment URL */
+    public string AttachementUrl{
+        get{
+            return getSfInstance()+'/apex/AttachmentUpload?aid='+ApexPages.currentPage().getParameters().get('aid')+'&stid='+ApexPages.currentPage().getParameters().get('stid');
+        }
+    }
+    
+    //constructor
+    public SurveyMobileController(){
+    	//constructor element.
+    }
+    /* Get Salesforce Instance */
+    public String getSfInstance()
+    {
+          return URL.getSalesforceBaseUrl().toExternalForm();
+    }
+       
+    /* Old code from Cory McIlroy starts here */
+    
     public static Account surveyAccount;
     public static QwikScore__c scoreCardType;
+
+   
     @RemoteAction 
         public static QwikScore_Scorecard__c saveScoreCard(String jsonString){
             List<QwikScore_Question_Answer__c> answerList = (List<QwikScore_Question_Answer__c>)JSON.deserialize(jsonString, List<QwikScore_Question_Answer__c>.class);
@@ -15,7 +38,7 @@ public with sharing class SurveyMobileController {
                 insert scoreCard;
                 for(QwikScore_Question_Answer__c answer: answerList){
                     answer.QwikScore_Scorecard__r = null;
-                    answer.QwikScore_Scorecard__c = scoreCard.id;
+                    answer.QwikScore_Scorecard__c = scoreCard.id;                    
                     answer.Answer_Unique_Id__c = String.valueOf(Math.random());
                 }
                 insert answerList;
@@ -28,17 +51,7 @@ public with sharing class SurveyMobileController {
 
                     
                 if (surveyAccount != null && scoreCardType != null) {
-                   /* if( scoreCardType.Name == 'Final Walkthrough Checklist' ){
-                        surveyAccount.Last_Inspection__c =  datetime.now(); 
-                        update surveyAccount;
-                    } */
-                    // check to see if this survey should update the last_inpection date
-                    /*if( scoreCardType.Name == 'Monthly Inspection' ){
-                        surveyAccount.Last_Inspection__c =  datetime.now(); 
-                        update surveyAccount;
-                    }*/
-                    // update Perf_Customer_Sat__c on account record
-                    //if ( scoreCardType.Name == 'Customer Satisfaction') {
+                 /* cleaned up a lot of unused code from here */
                         List<QwikScore_Scorecard__c> finishedScoreCards = 
                             [select Final_Score__c from QwikScore_Scorecard__c 
                             where QwikScore_Survey__c = :scoreCardType.Id 
@@ -47,10 +60,7 @@ public with sharing class SurveyMobileController {
                         Decimal totalScore = 0.0;
                         for(QwikScore_Scorecard__c sCard:finishedScoreCards){
                             totalScore += sCard.Final_Score__c;
-                      //  }
-                      /*  if(finishedScoreCards!=null && finishedScoreCards.size()>0){
-                            surveyAccount.Perf_Customer_Sat__c = totalScore/finishedScoreCards.size();
-                        }*/
+                      // once done calculating total score, update the survey account
                         update surveyAccount;
                     }
                 }
@@ -59,6 +69,8 @@ public with sharing class SurveyMobileController {
                     System.debug('survey and/or scorecardtype should not be null');
                 }
             }
+            
+            //upload image as attachment.            
             return scoreCard;
         }
 
@@ -95,6 +107,7 @@ public with sharing class SurveyMobileController {
                     Maximum_Value__c,
                     Minimum_Value__c,
                     Question_Type__c,
+                    IsHidden__c,unhideIfQuestion__c,unhideQuestionValue__c,
                     Question_Weight__c,
                     State__c,
                     Area__c
@@ -106,10 +119,12 @@ public with sharing class SurveyMobileController {
                 qAnswer.Question__c = question.Id;
                 qAnswer.Question__r = question;
                 qAnswer.Answer_Text__c = null;
+                qAnswer.comments__c= null;
                 qAnswer.QwikScore_Scorecard__r  = qs;
                 questionAnswers.add(qAnswer);
             }
             //put here for testing, commenting out - system.assert(false, questionAnswers);
+            System.debug(questionAnswers);
             return questionAnswers;
         } 
     

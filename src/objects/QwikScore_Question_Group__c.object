@@ -91,6 +91,7 @@
         <relationshipLabel>Question Groups</relationshipLabel>
         <relationshipName>QwikScore_Question_Groups</relationshipName>
         <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>

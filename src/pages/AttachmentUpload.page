@@ -1,0 +1,40 @@
+<apex:page controller="AttachmentUploadController" sidebar="false" showHeader="false"
+    standardStylesheets="false">
+     <head>
+     <title>Mobile Survey</title>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+   
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/jquery.mobile-1.1.0.min.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.survey_mobile_resources, 'css/style.css')}" />
+
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery-1.7.2.min.js')}"></script>
+    <script type="text/javascript">
+        $(document).bind("mobileinit", function () {
+        $.mobile.ajaxEnabled = false;
+   });
+</script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.mobile-1.1.0.min.js')}"></script>
+    <script src="{!URLFOR($Resource.survey_mobile_resources, 'js/jquery.json-2.3.min.js')}"></script>
+    <script>
+        $(function(){
+                $('#back_button').click(function(){
+                var accid=$('#acc_id').attr('value');
+                var stid=$('#sc_id').attr('value');
+                window.location.href='/apex/SurveyMobileTales?stid='+stid+'&aid='+accid;
+            });
+        });
+    </script>
+    </head><body>
+    <apex:form >   
+    <h2>Image Upload </h2>
+    <br/>
+        <apex:inputFile value="{!myfile.body}" filename="{!myfile.name}"/>
+        <apex:commandButton value="Add attachment" id="AttachAdd" action="{!Savedoc}" />
+        <br/> <br/>
+        <input type="button" id="back_button" value="Back" data-rel="back" data-inline="true" data-mini="true"/>
+        <input type="hidden" value="{!AccountId}" id="acc_id" />
+        <input type="hidden" value="{!ScorecardId}" id="sc_id"  />
+    </apex:form></body>
+</apex:page>
