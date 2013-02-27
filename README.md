@@ -44,7 +44,17 @@ __note that the SurveyMobileKI has the state and area listed as part of the ques
    Survey URL:
    https://c.na15.visual.force.com/apex/SurveyMobile?stid=a0Bi0000000Plcw&aid=001i0000002t48p
 
+   View the test scorecard for UofA
    
+   https://c.na15.visual.force.com/apex/surveyResults?score_card_id=a0Ai0000000PxtP
+
+   --
+  ### Data load of MM
+  -  The talend Script loads all three: scorecard type, groups and questions
+  - just sequentialy deactivate the subjobs
+
+   ### TODO
+   1. re-format SurveyResults
 
 
 --
